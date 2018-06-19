@@ -12,7 +12,8 @@ root -b -l > /dev/null << EOF
 MergeTrees("Validation", "${DIRECTORY}/tmp_*.root", "${CONCATENATED_FILE}")
 .q
 EOF
-rm ${DIRECTORY}/tmp*.root;
+
+cp ${CONCATENATED_FILE} ${DIRECTORY}
 
 # Process
 root -b -l << EOF
@@ -22,3 +23,5 @@ Process("${DIRECTORY}", "${CONCATENATED_FILE}")
 .q
 EOF
 
+rm ${CONCATENATED_FILE}
+rm ${DIRECTORY}/tmp*.root;

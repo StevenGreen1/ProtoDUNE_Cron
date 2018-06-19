@@ -22,9 +22,9 @@ parameters = [
                 }
              ]
 
-#update()
-#build()
-#generate(parameters)
-#run()
+update()
+build()
+generate(parameters)
+run()
 results(parameters)
 
