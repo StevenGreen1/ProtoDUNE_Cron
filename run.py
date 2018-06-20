@@ -5,6 +5,9 @@ from cron import *
 # Input Variables
 #===========================
 
+path = '/usera/sg568/LAr/Cron'
+os.chdir(path)
+
 parameters = [
                 { 'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_ProtoDUNE.xml'},
                   'EventType': "Beam_Cosmics",
