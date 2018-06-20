@@ -22,7 +22,7 @@ def generate(parameters):
         cwd = eventSelection['cwd']
         settingsLocation = eventSelection['SettingsLocation']
         outputPath = eventSelection['OutputPath']
-        maxFilesToProcess = eventSelection['MaxFilesToProcess']
+        maxEventsToProcess = eventSelection['MaxEventsToProcess']
         now = eventSelection['Now']
 
         for momenta in eventSelection['Momentum']:
@@ -67,7 +67,7 @@ def generate(parameters):
                 nFiles = len(allFiles)
 
             for idx in range (nFiles):
-                if eventCounter > maxFilesToProcess:
+                if eventCounter > maxEventsToProcess:
                     continue
 
                 nextFile = allFiles.pop(0)

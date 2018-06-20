@@ -16,11 +16,11 @@ parameters = [
                   'DetectorModel': 'ProtoDUNE-SP',
                   'Sample': 'mcc10',
                   'LArSoftVersion': 'larsoft_v06_63_00_triggered_mc_info',
-                  'SpaceChargeEffect': False,
+                  'SpaceChargeEffect': True,
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron',
-                  'MaxFilesToProcess' : 10,
+                  'MaxEventsToProcess' : 500,
                   'Now' : datetime.datetime.now()
                 }
              ]

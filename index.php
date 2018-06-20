@@ -1,7 +1,7 @@
 <html>
 <head>
-<title>Pandora Validation</title>
-<h1>Pandora Validation</h1>
+<title>Pandora ProtoDUNE-SP Validation</title>
+<h1>Pandora ProtoDUNE-SP Validation</h1>
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
           altField: "#alternate",
           altFormat: "DD, d MM, yy",
           dateFormat: "dd-mm-y",
-          minDate: new Date(2016, 3 - 1, 10),
+          minDate: new Date(2018, 6 - 1, 20),
           maxDate: "+0D"
         });
         });
@@ -26,10 +26,8 @@
 <form name="DatePicker" method="post">
     Version:
     <select name="myversion">
-        <option value="v04_16_00" <?php echo ($_POST['myversion'] == 'v04_16_00') ? 'selected' : ''; ?> >v04_16_00</option>
-        <option value="v05_04_00" <?php echo ($_POST['myversion'] == 'v05_04_00') ? 'selected' : ''; ?> >v05_04_00</option>
-        <option value="v05_08_00" <?php echo ($_POST['myversion'] == 'v05_08_00') ? 'selected' : ''; ?> >v05_08_00</option>
-     </select>
+        <option value="Beam_Cosmics_5GeV_SpaceChargeEffectOff" <?php echo ($_POST['myversion'] == 'Beam_Cosmics_5GeV_SpaceChargeEffectOff') ? 'selected' : ''; ?> >Beam_Cosmics_5GeV_SpaceChargeEffectOff</option>
+    </select>
     Date:
     <input type="text" id="datepicker" name="datepicker"/> <input type="text" size=30 id="alternate" name="alternate"/>
     <input type="submit">
@@ -44,7 +42,18 @@
         echo "<h4>$myversion</h4>";
         echo "<h4>$myaltDate</h4>";
 
-        $mydir="run/".$myversion."_".$mydate;
+        $yy = substr($mydate,6,2);
+        $mm = substr($mydate,3,2);
+        $dd = substr($mydate,0,2);
+
+        $newDateFormat = "20".$yy."_".$mm."_".$dd;
+
+        if (!empty($mydate))
+        {
+            echo "<h4>$newDateFormat</h4>";
+        }
+
+        $mydir="/r05/dune/sg568/LAr/Cron/".$newDateFormat."/".$myversion."/RootFiles";
 
         if (file_exists($mydir. '/CorrectEventList.txt'))
         {
@@ -56,24 +65,26 @@
             echo "<p><iframe src='$mydir/TableOutput.txt' frameborder='0' height='400' width='95%'></iframe></p>";
         }
 
-        $files = array('CCQEL_MU_P',
-                       'CCQEL_MU_P_NRecoNeutrinos.png',
-                       'CCQEL_MU_P_VtxDeltaR.png',
-                       'CCQEL_MU_P_MUON_HitsEfficiency.png',
-                       'CCQEL_MU_P_PROTON1_HitsEfficiency.png',
-                       'CCRES_MU_P_PIZERO',
-                       'CCRES_MU_P_PIZERO_NRecoNeutrinos.png',
-                       'CCRES_MU_P_PIZERO_VtxDeltaR.png',
-                       'CCRES_MU_P_PIZERO_MUON_HitsEfficiency.png',
-                       'CCRES_MU_P_PIZERO_PROTON1_HitsEfficiency.png',
-                       'CCRES_MU_P_PIZERO_PHOTON1_HitsEfficiency.png',
-                       'CCRES_MU_P_PIZERO_PHOTON2_HitsEfficiency.png',
-                       'ALL_INTERACTIONS',
-                       'ALL_INTERACTIONS_NRecoNeutrinos.png',
-                       'ALL_INTERACTIONS_VtxDeltaR.png',
-                       'ALL_INTERACTIONS_MUON_HitsEfficiency.png',
-                       'ALL_INTERACTIONS_PROTON1_HitsEfficiency.png',
-                       'ALL_INTERACTIONS_PHOTON1_HitsEfficiency.png'
+        $files = array('COSMIC_RAY',
+                       'COSMIC_RAY_MU_MUON_HitsAll.png',
+                       'COSMIC_RAY_MU_MUON_HitsEfficiency.png',
+                       'COSMIC_RAY_MU_MUON_MomentumAll.png',
+                       'COSMIC_RAY_MU_MUON_MomentumEfficiency.png',
+                       'COSMIC_RAY_MU_MUON_Completeness.png',
+                       'COSMIC_RAY_MU_MUON_Purity.png',
+                       'BEAM_PARTICLES',
+                       'BEAM_PARTICLE_E_ELECTRON_HitsAll.png',
+                       'BEAM_PARTICLE_E_ELECTRON_HitsEfficiency.png',
+                       'BEAM_PARTICLE_E_ELECTRON_MomentumAll.png',
+                       'BEAM_PARTICLE_E_ELECTRON_MomentumEfficiency.png',
+                       'BEAM_PARTICLE_E_ELECTRON_Completeness.png',
+                       'BEAM_PARTICLE_E_ELECTRON_Purity.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_HitsAll.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_HitsEfficiency.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_MomentumAll.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_MomentumEfficiency.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_Completeness.png',
+                       'BEAM_PARTICLE_PI_PLUS_PIPLUS_Purity.png'
                        );
 
         for ($i = 0; $i < count($files); $i++)
