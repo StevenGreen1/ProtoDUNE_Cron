@@ -93,6 +93,8 @@ def generate(parameters):
                             newContent = re.sub('Validation.root', rootFileFullPath, newContent)
                             newContent = re.sub('<algorithm type = "LArVisualMonitoring">((.|\n)*?)</algorithm>', '', newContent)
                             newContent = re.sub('<WriteToTree>(.*?)</WriteToTree>', '<WriteToTree>true</WriteToTree>', newContent)
+                            newContent = re.sub('<PrintAllToScreen>(.*?)</PrintAllToScreen>', '<PrintAllToScreen>false</PrintAllToScreen>', newContent)
+                            newContent = re.sub('<PrintMatchingToScreen>(.*?)</PrintMatchingToScreen>', '<PrintMatchingToScreen>false</PrintMatchingToScreen>', newContent)
 
                             jobList += settingsFullPath + ' ' + os.path.join(pndrPath,nextFile)
                             jobList += '\n'
