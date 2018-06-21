@@ -26,7 +26,7 @@
 <form name="DatePicker" method="post">
     Version:
     <select name="myversion">
-        <option value="Beam_Cosmics_5GeV_SpaceChargeEffectOff" <?php echo ($_POST['myversion'] == 'Beam_Cosmics_5GeV_SpaceChargeEffectOff') ? 'selected' : ''; ?> >Beam_Cosmics_5GeV_SpaceChargeEffectOff</option>
+        <option value="Beam_Cosmics_5GeV_SpaceChargeEffectOn" <?php echo ($_POST['myversion'] == 'mcc10_Beam_Cosmics_5GeV_SpaceChargeEffectOn') ? 'selected' : ''; ?> >Beam_Cosmics_5GeV_SpaceChargeEffectOn</option>
     </select>
     Date:
     <input type="text" id="datepicker" name="datepicker"/> <input type="text" size=30 id="alternate" name="alternate"/>
@@ -53,7 +53,7 @@
             echo "<h4>$newDateFormat</h4>";
         }
 
-        $mydir="/r05/dune/sg568/LAr/Cron/".$newDateFormat."/".$myversion."/RootFiles";
+        $mydir="CronResults/".$newDateFormat."/".$myversion."/RootFiles";
 
         if (file_exists($mydir. '/CorrectEventList.txt'))
         {
