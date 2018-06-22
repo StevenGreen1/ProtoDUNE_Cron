@@ -4,8 +4,9 @@ void Process(const std::string &filePath, const std::string &fileName)
     parameters.m_mapFileName = filePath + "/TableOutput.txt";
     parameters.m_eventFileName = filePath + "/CorrectEventList.txt";
     parameters.m_histogramOutput = true;
-    parameters.m_displayMatchedEvents = true;
+    parameters.m_displayMatchedEvents = false;
     parameters.m_applyUbooneFiducialCut = false;
+    parameters.m_testBeamMode = true;
 
     Validation(filePath + "/" + fileName, parameters);
 
