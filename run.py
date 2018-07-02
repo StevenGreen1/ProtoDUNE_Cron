@@ -11,7 +11,7 @@ os.chdir(path)
 parameters = [
                 { 'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_ProtoDUNE.xml'},
                   'EventType': "Beam_Cosmics",
-                  'EventsPerFile' : 10,
+                  'EventsPerFile' : 40,
                   'Momentum':  [5],
                   'DetectorModel': 'ProtoDUNE-SP',
                   'Sample': 'mcc10',
