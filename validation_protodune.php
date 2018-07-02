@@ -2,35 +2,42 @@
 <head>
 <title>Pandora ProtoDUNE-SP Validation</title>
 <h1>Pandora ProtoDUNE-SP Validation</h1>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
 
-<head>
-    <meta charset="utf-8">
-    <title>jQuery UI Datepicker</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script>
-        $(function() {
-        $( "#datepicker" ).datepicker({
-          altField: "#alternate",
-          altFormat: "DD, d MM, yy",
-          dateFormat: "dd-mm-y",
-          minDate: new Date(2018, 6 - 1, 20),
-          maxDate: "+0D"
-        });
-        });
-    </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery UI Datepicker - Default functionality</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+$( function() 
+{
+    $( "#datepicker" ).datepicker({
+        altField: "#alternate",
+        altFormat: "DD, d MM, yy",
+        dateFormat: "dd-mm-y",
+        minDate: new Date(2018, 6 - 1, 20),
+        maxDate: "+0D"
+    });
+} );
+</script>
 </head>
 
 <form name="DatePicker" method="post">
     Version:
     <select name="myversion">
-        <option value="Beam_Cosmics_5GeV_SpaceChargeEffectOn" <?php echo ($_POST['myversion'] == 'mcc10_Beam_Cosmics_5GeV_SpaceChargeEffectOn') ? 'selected' : ''; ?> >Beam_Cosmics_5GeV_SpaceChargeEffectOn</option>
+        <option value="mcc10_larsoft_v06_81_00_Beam_Cosmics_5GeV_SpaceChargeEffectOn" <?php echo ($_POST['myversion'] == 'mcc10_larsoft_v06_81_00_Beam_Cosmics_5GeV_SpaceChargeEffectOn') ? 'selected' : ''; ?> >mcc10_larsoft_v06_81_00_Beam_Cosmics_5GeV_SpaceChargeEffectOn</option>
+        <option value="Beam_Cosmics_5GeV_SpaceChargeEffectOn" <?php echo ($_POST['myversion'] == 'mcc10_larsoft_v06_63_00_Beam_Cosmics_5GeV_SpaceChargeEffectOn') ? 'selected' : ''; ?> >mcc10_larsoft_v06_63_00_Beam_Cosmics_5GeV_SpaceChargeEffectOn</option>
     </select>
     Date:
     <input type="text" id="datepicker" name="datepicker"/> <input type="text" size=30 id="alternate" name="alternate"/>
     <input type="submit">
+</form>
+
+<form>
+    <input class="MyButton" type="button" value="Diff Table Outputs?" onclick="window.location.href='https://www.hep.phy.cam.ac.uk/~sg568/get_cron_diff.php'" />
 </form>
 
 <body>
@@ -62,7 +69,8 @@
 
         if (file_exists($mydir. '/TableOutput.txt'))
         {
-            echo "<p><iframe src='$mydir/TableOutput.txt' frameborder='0' height='400' width='95%'></iframe></p>";
+            $text=nl2br(file_get_contents("$mydir/TableOutput.txt"));
+            echo "<p>$text</p>";
         }
 
         $files = array('COSMIC_RAY',
@@ -73,12 +81,14 @@
                        'COSMIC_RAY_MU_MUON_Completeness.png',
                        'COSMIC_RAY_MU_MUON_Purity.png',
                        'BEAM_PARTICLES',
+                       'Electrons and Positrons',
                        'BEAM_PARTICLE_E_ELECTRON_HitsAll.png',
                        'BEAM_PARTICLE_E_ELECTRON_HitsEfficiency.png',
                        'BEAM_PARTICLE_E_ELECTRON_MomentumAll.png',
                        'BEAM_PARTICLE_E_ELECTRON_MomentumEfficiency.png',
                        'BEAM_PARTICLE_E_ELECTRON_Completeness.png',
                        'BEAM_PARTICLE_E_ELECTRON_Purity.png',
+                       'Pi Plus',
                        'BEAM_PARTICLE_PI_PLUS_PIPLUS_HitsAll.png',
                        'BEAM_PARTICLE_PI_PLUS_PIPLUS_HitsEfficiency.png',
                        'BEAM_PARTICLE_PI_PLUS_PIPLUS_MomentumAll.png',
@@ -103,5 +113,6 @@
         }
     ?> 
 </body>
+
 </html>
 

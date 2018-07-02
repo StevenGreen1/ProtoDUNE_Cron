@@ -15,7 +15,7 @@ parameters = [
                   'Momentum':  [5],
                   'DetectorModel': 'ProtoDUNE-SP',
                   'Sample': 'mcc10',
-                  'LArSoftVersion': 'larsoft_v06_63_00_triggered_mc_info',
+                  'LArSoftVersion': 'larsoft_v06_81_00',
                   'SpaceChargeEffect': True,
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),

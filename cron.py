@@ -35,8 +35,8 @@ def generate(parameters):
             pndrPath = '/r05/dune/protoDUNE/' + sample + '_Pndr/' + detectorModel + '/LArSoft_Version_' + larsoftVersion + '/' + eventType + '/' + str(momenta) + 'GeV/' + spaceChargeString + '/'
             pndrFormat = sample + '_Pndr_' + detectorModel + '_LArSoft_Version_' + larsoftVersion + '_Beam_Cosmics_Momentum_' + str(momenta) + 'GeV_(.*?).pndr'
 
-            settingsPath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/PandoraSettings')
-            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/RootFiles')
+            settingsPath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/PandoraSettings')
+            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/RootFiles')
 
             if not os.path.exists(settingsPath):
                 os.makedirs(settingsPath)
