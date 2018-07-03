@@ -139,6 +139,8 @@ def build():
 
 def results(parameters):
     for eventSelection in parameters:
+        sample = eventSelection['Sample']
+        larsoftVersion = eventSelection['LArSoftVersion']
         eventType = eventSelection['EventType']
         spaceChargeOn = eventSelection['SpaceChargeEffect']
         outputPath = eventSelection['OutputPath']
@@ -152,8 +154,9 @@ def results(parameters):
             else:
                 spaceChargeString = 'SpaceChargeEffectOff'
 
-            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/RootFiles')
-            concatenatedFile = "EventValidation_" + str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '_Concatenated.root'
+            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/RootFiles')
+
+            concatenatedFile = "EventValidation_" + str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '_' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '_Concatenated.root'
 
             process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile])
             process.wait()
