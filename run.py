@@ -9,7 +9,8 @@ path = '/usera/sg568/LAr/Cron'
 os.chdir(path)
 
 parameters = [
-                { 'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_ProtoDUNE.xml'},
+                { 'JobName' : "ProtoDUNE",
+                  'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_ProtoDUNE.xml'},
                   'EventType': "Beam_Cosmics",
                   'EventsPerFile' : 40,
                   'Momentum':  [5],
@@ -28,6 +29,6 @@ parameters = [
 update()
 build()
 generate(parameters)
-run()
+run(parameters)
 results(parameters)
 

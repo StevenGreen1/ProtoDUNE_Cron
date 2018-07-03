@@ -1,4 +1,4 @@
-void Process(const std::string &filePath, const std::string &fileName)
+void Process(const std::string &filePath, const std::string &fileName, const std::string &testBeamMode)
 {
     Parameters parameters;
     parameters.m_mapFileName = filePath + "/TableOutput.txt";
@@ -6,7 +6,9 @@ void Process(const std::string &filePath, const std::string &fileName)
     parameters.m_histogramOutput = true;
     parameters.m_displayMatchedEvents = false;
     parameters.m_applyUbooneFiducialCut = false;
-    parameters.m_testBeamMode = true;
+
+    if (testBeamMode == "true")
+        parameters.m_testBeamMode = true;
 
     Validation(filePath + "/" + fileName, parameters);
 
