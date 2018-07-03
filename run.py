@@ -21,7 +21,7 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron',
-                  'MaxEventsToProcess' : 500,
+                  'MaxEventsToProcess' : 600,
                   'Now' : datetime.datetime.now()
                 }
              ]

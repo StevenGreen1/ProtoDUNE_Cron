@@ -40,7 +40,7 @@ def generate(parameters):
                 jobParameters['SettingsPath'] = settingsPath
                 jobParameters['RootFilePath'] = rootFilePath
 
-                generateJobFiles(eventSelection, jobParameters)
+                jobListString = generateJobFiles(eventSelection, jobParameters)
                 jobList += jobListString
 
         elif "DUNEFD" in eventSelection['JobName']:
