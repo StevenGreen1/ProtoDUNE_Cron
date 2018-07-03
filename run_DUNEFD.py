@@ -24,7 +24,7 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron_DUNEFD',
-                  'MaxEventsToProcess' : 100,
+                  'MaxEventsToProcess' : 5000,
                   'Now' : datetime.datetime.now()
                 }
              ]
@@ -34,8 +34,6 @@ build()
 generate(parameters)
 run(parameters)
 results(parameters)
-
-sys.exit()
 
 #===================
 # Muon Neutrinos
@@ -58,8 +56,6 @@ parameters = [
                 }
              ]
 
-update()
-build()
 generate(parameters)
 run(parameters)
 results(parameters)
@@ -85,8 +81,6 @@ parameters = [
                 }
              ]
 
-update()
-build()
 generate(parameters)
 run(parameters)
 results(parameters)
