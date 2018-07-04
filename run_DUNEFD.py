@@ -8,9 +8,9 @@ from cron import *
 path = '/usera/sg568/LAr/Cron'
 os.chdir(path)
 
-#===================
-# Electron Neutrinos
-#===================
+#======================================================
+# Electron Neutrinos, Muon Neutrinos and Anti-Neutrinos
+#======================================================
 
 parameters = [
                 { 'JobName' : "DUNEFD",
@@ -24,22 +24,9 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron_DUNEFD',
-                  'MaxEventsToProcess' : 5000,
+                  'MaxEventsToProcess' : 20000,
                   'Now' : datetime.datetime.now()
-                }
-             ]
-
-update()
-build()
-generate(parameters)
-run(parameters)
-results(parameters)
-
-#===================
-# Muon Neutrinos
-#===================
-
-parameters = [
+                },
                 { 'JobName' : "DUNEFD",
                   'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_DUNEFD.xml'},
                   'EventType': "numu",
@@ -51,20 +38,9 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron_DUNEFD',
-                  'MaxEventsToProcess' : 5000,
+                  'MaxEventsToProcess' : 20000,
                   'Now' : datetime.datetime.now()
-                }
-             ]
-
-generate(parameters)
-run(parameters)
-results(parameters)
-
-#===================
-# Anti-Neutrinos
-#===================
-
-parameters = [
+                },
                 { 'JobName' : "DUNEFD",
                   'PandoraSettingsFiles': {'Master' : 'PandoraSettings_Master_DUNEFD.xml'},
                   'EventType': "anu",
@@ -76,11 +52,13 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron_DUNEFD',
-                  'MaxEventsToProcess' : 5000,
+                  'MaxEventsToProcess' : 20000,
                   'Now' : datetime.datetime.now()
                 }
              ]
 
+update()
+build()
 generate(parameters)
 run(parameters)
 results(parameters)
