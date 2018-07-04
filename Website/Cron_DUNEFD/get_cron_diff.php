@@ -17,7 +17,7 @@ $( function()
 {
     $( ".datepicker" ).datepicker({
         dateFormat: "dd-mm-y",
-        minDate: new Date(2018, 6 - 1, 20),
+        minDate: new Date(2018, 7 - 1, 3),
         maxDate: "+0D"
     });
 } );
