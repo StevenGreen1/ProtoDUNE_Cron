@@ -2,7 +2,7 @@
 <head>
 <title>Pandora ProtoDUNE-SP Validation</title>
 <h1>Pandora ProtoDUNE-SP Validation</h1>
-<link rel="stylesheet" type="text/css" href="mystyle.css">
+<link rel="stylesheet" type="text/css" href="Cron_ProtoDUNE/mystyle.css">
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,7 +37,7 @@ $( function()
 </form>
 
 <form>
-    <input class="MyButton" type="button" value="Diff Table Outputs?" onclick="window.location.href='https://www.hep.phy.cam.ac.uk/~sg568/get_cron_diff.php'" />
+    <input class="MyButton" type="button" value="Diff Table Outputs?" onclick="window.location.href='https://www.hep.phy.cam.ac.uk/~sg568/Cron_ProtoDUNE/get_cron_diff.php'" />
 </form>
 
 <body>
@@ -60,7 +60,7 @@ $( function()
             echo "<h4>$newDateFormat</h4>";
         }
 
-        $mydir="CronResults/".$newDateFormat."/".$myversion."/RootFiles";
+        $mydir="Cron_ProtoDUNE/CronResults/".$newDateFormat."/".$myversion."/RootFiles";
 
         if (file_exists($mydir. '/CorrectEventList.txt'))
         {

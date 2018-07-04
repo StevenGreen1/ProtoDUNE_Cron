@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pandora ProtoDUNE-SP Validation</title>
-<h1>Pandora ProtoDUNE-SP Validation</h1>
+<title>Pandora DUNEFD Validation</title>
+<h1>Pandora DUNEFD Validation</h1>
 <link rel="stylesheet" type="text/css" href="mystyle.css">
 </head>
 
@@ -42,7 +42,7 @@ $tableOutput2 = $mydir2. '/TableOutput.txt';
 
 if (file_exists($tableOutput1) && file_exists($tableOutput2))
 {
-    $output = shell_exec("diff -u $tableOutput1 $tableOutput2 | ./diff2html.sh");
+    $output = shell_exec("diff -u $tableOutput1 $tableOutput2 | ./../diff2html.sh");
     echo $output;
     file_put_contents('tmp.php', $output);
     include("tmp.php");
