@@ -149,30 +149,43 @@ def generateJobFiles(eventSelection, jobParameters):
 #==================
 
 def run(parameters):
-    for eventSelection in parameters:
-        commandString = ''
-        geometryFile = ''
+    commandString = ''
+    geometryFile = ''
 
+    isProtoDUNE = False
+    isDUNEFD = False
+
+    for eventSelection in parameters:
         if "ProtoDUNE" in eventSelection['JobName']:
             commandString = 'full'
             geometryFile = 'LArReco/geometry/PandoraGeometry_ProtoDUNE.xml'
+            isProtoDUNE = True
 
         elif "DUNEFD" in eventSelection['JobName']:
             commandString = 'allhitsnu'
             geometryFile = 'LArReco/geometry/PandoraGeometry_DUNEFD_1x2x6.xml'
+            isDUNEFD = True
 
-        with open('RunFile.txt') as f:
-            content = f.readlines()
+    if (isProtoDUNE and isDUNEFD) or (not isProtoDUNE and not isDUNEFD):
+        print("Attempting to run cron job for multiple detectors")
+        sys.exit()
 
-        content = [x.strip() for x in content]
+    print("Successful")
 
-        for args in content:
-            args = args.split()
-            args.insert(0, os.path.join(os.getcwd(), 'LArReco.sh'))
-            args.append(commandString)
-            args.append(geometryFile)
-            process = subprocess.Popen(args)
-            process.wait()
+    sys.exit()
+
+    with open('RunFile.txt') as f:
+        content = f.readlines()
+
+    content = [x.strip() for x in content]
+
+    for args in content:
+        args = args.split()
+        args.insert(0, os.path.join(os.getcwd(), 'LArReco.sh'))
+        args.append(commandString)
+        args.append(geometryFile)
+        process = subprocess.Popen(args)
+        process.wait()
 
 #==================
 
