@@ -5,8 +5,8 @@ from cron import *
 # Input Variables
 #===========================
 
-path = '/usera/sg568/LAr/Cron'
-os.chdir(path)
+#path = '/usera/sg568/LAr/Cron'
+#os.chdir(path)
 
 parameters = [
                 { 'JobName' : "ProtoDUNE",

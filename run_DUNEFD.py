@@ -5,8 +5,8 @@ from cron import *
 # Input Variables
 #===========================
 
-path = '/usera/sg568/LAr/Cron_DUNEFD'
-os.chdir(path)
+#path = '/usera/sg568/LAr/Cron_DUNEFD'
+#os.chdir(path)
 
 #======================================================
 # Electron Neutrinos, Muon Neutrinos and Anti-Neutrinos
