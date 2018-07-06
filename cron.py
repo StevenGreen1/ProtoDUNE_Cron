@@ -170,10 +170,6 @@ def run(parameters):
         print("Attempting to run cron job for multiple detectors")
         sys.exit()
 
-    print("Successful")
-
-    sys.exit()
-
     with open('RunFile.txt') as f:
         content = f.readlines()
 
