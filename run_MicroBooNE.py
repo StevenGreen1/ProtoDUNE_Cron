@@ -24,7 +24,7 @@ parameters = [
                   'cwd' : os.getcwd(),
                   'SettingsLocation' : os.path.join(os.getcwd(), 'LArReco/settings'),
                   'OutputPath' : '/r05/dune/sg568/LAr/Cron_MicroBooNE',
-                  'MaxEventsToProcess' : 2,
+                  'MaxEventsToProcess' : 10000,
                   'Now' : datetime.datetime.now()
                 }
              ]
