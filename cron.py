@@ -58,6 +58,21 @@ def generate(parameters):
             jobListString = generateJobFiles(eventSelection, jobParameters)
             jobList += jobListString
 
+        elif "MicroBooNE" in eventSelection['JobName']:
+            pndrPath = '/r05/dune/MicroBooNE/' + sample + '_Pndr/' + detectorModel + '/LArSoft_Version_' + larsoftVersion + '/' + eventType + '/' + spaceChargeString + '/'
+            pndrFormat = 'Pandora_Events_(.*?).pndr'
+            settingsPath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '/PandoraSettings')
+            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '/RootFiles')
+
+            jobParameters = {}
+            jobParameters['PndrPath'] = pndrPath
+            jobParameters['PndrFormat'] = pndrFormat
+            jobParameters['SettingsPath'] = settingsPath
+            jobParameters['RootFilePath'] = rootFilePath
+
+            jobListString = generateJobFiles(eventSelection, jobParameters)
+            jobList += jobListString
+
     runFile = open(os.path.join(cwd, 'RunFile.txt') ,'w')
     runFile.write(jobList)
     runFile.close()
@@ -154,6 +169,7 @@ def run(parameters):
 
     isProtoDUNE = False
     isDUNEFD = False
+    isMicroBooNE = False
 
     for eventSelection in parameters:
         if "ProtoDUNE" in eventSelection['JobName']:
@@ -166,8 +182,13 @@ def run(parameters):
             geometryFile = 'LArReco/geometry/PandoraGeometry_DUNEFD_1x2x6.xml'
             isDUNEFD = True
 
-    if (isProtoDUNE and isDUNEFD) or (not isProtoDUNE and not isDUNEFD):
-        print("Attempting to run cron job for multiple detectors")
+        elif "MicroBooNE" in eventSelection['JobName']:
+            commandString = 'allhitsnu' # No cosmics in paper sample
+            geometryFile = 'LArReco/geometry/PandoraGeometry_MicroBooNE_MCC7Gaps.xml' # Valid for paper samples
+            isMicroBooNE = True
+
+    if [isProtoDUNE, isDUNEFD, isMicroBooNE].count(True) != 1:
+        print("Attempting to run cron job for either no detector or multiple detectors")
         sys.exit()
 
     with open('RunFile.txt') as f:
@@ -213,18 +234,25 @@ def results(parameters):
         else:
             spaceChargeString = 'SpaceChargeEffectOff'
 
+        # ATTN: The thrid and fourth arguments of results.sh are isTestBeamMode and applyUbooneFiducialCuts
         if "ProtoDUNE" in eventSelection['JobName']:
             # ProtoDUNE Events
             for momenta in eventSelection['Momentum']:
                 rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '/RootFiles')
                 concatenatedFile = "EventValidation_" + str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '_' + sample + '_' + larsoftVersion + '_' + eventType + '_' + str(momenta) + 'GeV_' + spaceChargeString + '_Concatenated.root'
-                process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile, 'true'])
+                process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile, 'true', 'false'])
                 process.wait()
 
         elif "DUNEFD" in eventSelection['JobName']:
             # DUNEFD Events
             rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '/RootFiles')
             concatenatedFile = "EventValidation_" + str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '_' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '_Concatenated.root'
-            process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile, 'false'])
+            process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile, 'false', 'false'])
             process.wait()
 
+        elif "MicroBooNE" in eventSelection['JobName']:
+            # MicroBooNE Events
+            rootFilePath = os.path.join(outputPath, str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '/' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '/RootFiles')
+            concatenatedFile = "EventValidation_" + str(now.strftime("%Y")) + '_' + now.strftime("%m") + '_' + now.strftime("%d") + '_' + sample + '_' + larsoftVersion + '_' + eventType + '_' + spaceChargeString + '_Concatenated.root'
+            process = subprocess.Popen([os.path.join(os.getcwd(), 'results.sh'), rootFilePath, concatenatedFile, 'false', 'true'])
+            process.wait()

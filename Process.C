@@ -1,4 +1,4 @@
-void Process(const std::string &filePath, const std::string &fileName, const std::string &testBeamMode)
+void Process(const std::string &filePath, const std::string &fileName, const std::string &testBeamMode, const std::string &applyUbooneFiducialCut)
 {
     Parameters parameters;
     parameters.m_mapFileName = filePath + "/TableOutput.txt";
@@ -6,6 +6,9 @@ void Process(const std::string &filePath, const std::string &fileName, const std
     parameters.m_histogramOutput = true;
     parameters.m_displayMatchedEvents = false;
     parameters.m_applyUbooneFiducialCut = false;
+
+    if (applyUbooneFiducialCut == "true")
+        parameters.m_applyUbooneFiducialCut = true;
 
     if (testBeamMode == "true")
         parameters.m_testBeamMode = true;
